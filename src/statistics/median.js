@@ -1,12 +1,9 @@
 import round from './round'
 
 function mean (input = []) {
-  // No need to process a zero length array.
   if (input.length === 0) {
     return 0
   }
-  // Could skip a pass of the array if needed and just reference the lengths
-  // in the return statement but it adds slightly to readibility.
   const sorted = input.sort(function (x, y) { return x - y })
   const even = sorted.length % 2 === 0
   // In an odd array, the middle value will be the true middle. In an even array

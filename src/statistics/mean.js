@@ -1,5 +1,4 @@
 function mean (input = []) {
-  // No need to process zero length array.
   if (input.length === 0) {
     return 0
   }
