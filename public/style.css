@@ -1,0 +1,100 @@
+html {
+  font-family: monospace;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+body {
+  margin: 1rem;
+  background-color: #eee;
+}
+
+label {
+  display: block;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.paper {
+  position: relative;
+  width: 160px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 44px;
+  background-color: white;
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0,.2) 1px, transparent 1px);
+  background-image: -moz-linear-gradient(rgba(0, 0, 0,.2) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0, 0, 0,.2) 1px, transparent 1px);
+  background-size: 100% 24px;
+  background-position: 0 1em;
+  background-origin: content-box;
+}
+
+.paper::before {
+  content: ' ';
+  position: absolute;
+  width: 4px;
+  top: 0;
+  left: 30px;
+  bottom: 0;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-color: transparent #ccc;
+}
+
+.paper:hover {
+  box-shadow: 0 0 6px #0275d8;
+}
+
+.paper h1,
+.paper h2,
+.paper h3 {
+  font-size: inherit;
+  margin: 0 0 24px 0;
+}
+
+.paper h1 {
+  text-decoration: underline;
+}
+
+.paper p {
+  margin: 0 0 24px 0;
+}
+
+.paper span {
+  background-color: #0275d8;
+  color: white;
+}
+
+.paper ul {
+  margin: 0 0 24px 0;
+  padding: 0;
+}
+
+.paper li {
+  margin: 0;
+  display: block;
+}
+
+@media (min-width: 425px) {
+  .paper {
+    width: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .paper {
+    width: 640px;
+  }
+}
