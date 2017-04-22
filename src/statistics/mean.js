@@ -1,11 +1,13 @@
-function mean (input = []) {
-  if (input.length === 0) {
-    return 0
+function mean (convert) {
+  return function (items = []) {
+    if (items.length === 0) {
+      return 0
+    }
+    const total = items.reduce(function (subtotal, item) {
+      return subtotal + convert(item)
+    }, 0)
+    return total / items.length
   }
-  const total = input.reduce(function (subtotal, val) {
-    return subtotal + val
-  }, 0)
-  return total / input.length
 }
 
 export default mean

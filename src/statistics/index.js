@@ -1,8 +1,9 @@
-import mean from './mean.js'
-import median from './median.js'
-import mode from './mode.js'
-import round from './round.js'
-import split from './split.js'
+import mean from './mean'
+import median from './median'
+import { mode, numberMode, stringMode } from './mode'
+import round from './round'
+import split from './split'
+import identity from './identity'
 
 function statistics (
   input,
@@ -27,23 +28,14 @@ function statistics (
   const lines = split(sanitized, lineSeparator)
   const words = split(lines, wordSeparator)
   const letters = split(words, letterSeparator)
-  const wordLengths = words.map((word) => (word.length))
 
-  // Generate a mode function which operates on numbers.
-  // Mode is calculated by generating a frequency map.
-  // The JavaScript object can only use strings as it's keys, so
-  // we need a way of turning numeric values into strings and then back again.
-  const numToStr = (num) => (String(num))
-  const strToNum = (str) => (Number(str))
-  const numberMode = mode(numToStr, strToNum)
+  const strToLength = (word) => (word.length)
+  const meanLength = mean(strToLength)
+  const medianLength = median(strToLength)
+  const modalLength = numberMode(strToLength)
 
-  // Another limitation of using JavaScript objects for maps is the chance
-  // of collisions with JavaScript reserved words.
-  // We create another mode function which will prepend the value with an
-  // identifier to stop this from happening
-  const boxKey = (val) => (`STATS_${val}`)
-  const unboxKey = (val) => (val.substring(6))
-  const stringMode = mode(boxKey, unboxKey)
+  const commonWords = stringMode(identity)
+  const commonLetters = stringMode(identity)
 
   return {
     sanitized: sanitized,
@@ -53,20 +45,21 @@ function statistics (
     lineCount: lines.length,
     wordCount: words.length,
     letterCount: letters.length,
-    mean: round(mean(wordLengths)),
-    median: round(median(wordLengths)),
-    mode: numberMode(wordLengths),
-    commonWords: stringMode(words),
-    commonLetters: stringMode(letters)
+    mean: round(meanLength(words)),
+    median: round(medianLength(words)),
+    mode: modalLength(words),
+    commonWords: commonWords(words),
+    commonLetters: commonLetters(letters)
   }
 }
 
 export default statistics
 
 export {
-  statistics,
   mean,
   median,
   mode,
+  numberMode,
+  stringMode,
   round
 }
