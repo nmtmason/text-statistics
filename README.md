@@ -144,8 +144,8 @@ The frequency map is implemented using a JavaScript object which has the followi
 Two functions must be given to `mode` to overcome these limitations.
 Called on each item in the array, they transform each item into a key and back again.
 
-Two helper functions - `numberMode` and `stringMode` are provided which allow the storage of numbers and strings as keys.
-The `numberMode` function casts Numbers to Strings when storing the key key. When retrieved, the String is cast back to a Number.
+Two helper functions - `numberMode` and `stringMode` - are provided which allow the storage of numbers and strings as keys.
+The `numberMode` function casts Numbers to Strings when storing the key. When retrieved, the String is cast back to a Number.
 The `stringMode` function prepends an identifier to all keys to prevent collisions. When retrieved, the identifer is removed,
 
 The `mode` function is a higher order function will return a function similar to `mean` and `median`.
