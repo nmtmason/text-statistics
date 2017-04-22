@@ -24,16 +24,17 @@ function statistics (
   const text = caseSensitive ? input : input.toLowerCase()
   const sanitized = text.replace(textSanitizer, '')
 
-  // Collect lines, words, and word lengths.
+  // Collect lines, words, and word lengths
   const lines = split(sanitized, lineSeparator)
   const words = split(lines, wordSeparator)
   const letters = split(words, letterSeparator)
 
+  // Create functions to calculate different types of averages over the word
+  // length, as well as the most common words and letters
   const strToLength = (word) => (word.length)
   const meanLength = mean(strToLength)
   const medianLength = median(strToLength)
   const modalLength = numberMode(strToLength)
-
   const commonWords = stringMode(identity)
   const commonLetters = stringMode(identity)
 
