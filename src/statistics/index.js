@@ -1,3 +1,5 @@
+import XRegExp from 'xregexp'
+
 import mean from './mean'
 import median from './median'
 import { mode, numberMode, stringMode } from './mode'
@@ -11,7 +13,7 @@ function statistics (
     // Case insensitve
     caseSensitive = false,
     // Replace everything but letters and spaces
-    textSanitizer = /[^a-zA-Z\d\s:]/g,
+    textSanitizer = XRegExp('[^\\pL\\d\\s]', 'ig'),
     // Match CRLF and LF
     lineSeparator = /\r\n?|\n/,
     // Words delimited by spaces
@@ -22,7 +24,7 @@ function statistics (
 ) {
   // Strip back to letters and spaces
   const text = caseSensitive ? input : input.toLowerCase()
-  const sanitized = text.replace(textSanitizer, '')
+  const sanitized = XRegExp.replace(text, textSanitizer, '')
 
   // Collect lines, words, and word lengths
   const lines = split(sanitized, lineSeparator)
