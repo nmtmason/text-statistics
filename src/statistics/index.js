@@ -5,7 +5,6 @@ import median from './median'
 import { mode, numberMode, stringMode } from './mode'
 import round from './round'
 import split from './split'
-import identity from './identity'
 
 function statistics (
   input,
@@ -31,14 +30,15 @@ function statistics (
   const words = split(lines, wordSeparator)
   const letters = split(words, letterSeparator)
 
-  // Create functions to calculate different types of averages over the word
-  // length, as well as the most common words and letters
-  const strToLength = (word) => (word.length)
-  const meanLength = mean(strToLength)
-  const medianLength = median(strToLength)
-  const modalLength = numberMode(strToLength)
-  const commonWords = stringMode(identity)
-  const commonLetters = stringMode(identity)
+  // Convenience functions for creating other functions
+  const compose = (a, b) => (x) => a(b(x))
+  const map = (fn) => (items) => items.map(fn)
+
+  // Create average functions operating on word lengths
+  const strToLength = (word) => word.length
+  const meanLength = compose(mean, map(strToLength))
+  const medianLength = compose(median, map(strToLength))
+  const modalLength = compose(numberMode, map(strToLength))
 
   return {
     sanitized: sanitized,
@@ -51,8 +51,8 @@ function statistics (
     mean: round(meanLength(words)),
     median: round(medianLength(words)),
     mode: modalLength(words),
-    commonWords: commonWords(words),
-    commonLetters: commonLetters(letters)
+    commonWords: stringMode(words),
+    commonLetters: stringMode(letters)
   }
 }
 
