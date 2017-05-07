@@ -1,14 +1,12 @@
-function reducer (delimeter) {
-  return function (items, item) {
-    return (
-      item === ''
-      ? items
-      : items.concat(item.split(delimeter))
-    )
-  }
+const reducer = (delimeter) => (items, item) => {
+  return (
+    item === ''
+    ? items
+    : items.concat(item.split(delimeter))
+  )
 }
 
-function split (input, delimeter) {
+const split = (input, delimeter) => {
   if (!Array.isArray(input)) {
     input = [input]
   }

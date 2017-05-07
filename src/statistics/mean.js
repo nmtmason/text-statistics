@@ -1,4 +1,4 @@
-const mean = function (items = []) {
+const mean = (items = []) => {
   if (items.length === 0) {
     return 0
   }

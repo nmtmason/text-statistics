@@ -6,7 +6,7 @@ import { mode, numberMode, stringMode } from './mode'
 import round from './round'
 import split from './split'
 
-function statistics (
+const statistics = (
   input,
   {
     // Case insensitve
@@ -20,7 +20,7 @@ function statistics (
     // Every letter separated
     letterSeparator = ''
   } = {}
-) {
+) => {
   // Strip back to letters and spaces
   const text = caseSensitive ? input : input.toLowerCase()
   const sanitized = XRegExp.replace(text, textSanitizer, '')

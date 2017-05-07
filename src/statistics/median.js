@@ -1,4 +1,4 @@
-const median = function (items = []) {
+const median = (items = []) => {
   if (items.length === 0) {
     return 0
   }
